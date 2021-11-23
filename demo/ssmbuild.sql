@@ -14,6 +14,10 @@
  Date: 23/11/2021 15:34:42
 */
 
+CREATE DATABASE `ssmbuild`
+    CHARACTER SET 'utf8'
+    COLLATE 'utf8_general_ci';
+
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
