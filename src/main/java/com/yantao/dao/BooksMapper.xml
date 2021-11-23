@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yantao.dao.BooksMapper">
+
+    <resultMap id="BaseResultMap" type="com.yantao.pojo.Books">
+        <id column="book_id" jdbcType="INTEGER" property="bookId"/>
+        <result column="book_name" jdbcType="VARCHAR" property="bookName"/>
+        <result column="book_count" jdbcType="INTEGER" property="bookCount"/>
+        <result column="detail" jdbcType="VARCHAR" property="detail"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="Books">
+        insert into books (book_name, book_count, detail)
+        values (#{bookName}, #{bookCount}, #{detail});
+    </insert>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete
+        from books
+        where book_id = #{bookId};
+    </delete>
+
+    <update id="update" parameterType="Books">
+        update books
+        set book_name = #{bookName},
+            book_count = #{bookCount},
+            detail = #{detail}
+        where book_id = #{bookId};
+    </update>
+
+    <select id="selectOneById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select *
+        from books
+        where book_id = #{bookId};
+    </select>
+
+    <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select *
+        from books
+        <where>
+            <if test="bookName != null">
+                book_name like '%' #{bookName} '%'
+            </if>
+        </where>
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select *
+        from books;
+    </select>
+    
+</mapper>

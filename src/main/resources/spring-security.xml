@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:set="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+<!--    扫描包-->
+    <context:component-scan base-package="com.yantao.security" />
+
+<!--    开启三种权限控制方式:-->
+<!--        pre-post-annotations="enabled"  支持表达式的注解-->
+<!--        jsr250-annotations="enabled"    JSR-250注解-->
+<!--        secured-annotations="enabled"   security框架自带的注解-->
+    <security:global-method-security pre-post-annotations="enabled"
+                                     jsr250-annotations="enabled"
+                                     secured-annotations="enabled"/>
+
+<!--    <security:http>:spring过滤器链配置-->
+<!--    1) 需要拦截什么资源-->
+<!--    2) 什么资源对应什么角色权限-->
+<!--    3) 定制认证方式: HttpBasic or FormLogin-->
+<!--    4) 定义登录页面,定义登录请求地址,定义错误处理方式-->
+    <security:http auto-config="true" use-expressions="true">
+<!--        remember me-->
+        <security:remember-me data-source-ref="dataSource"
+                              token-validity-seconds="604800"
+                              remember-me-parameter="remember-me"/>
+<!--        <security:http-basic/>:使用http-basic的方式进行认证-->
+<!--        使用form-login登录-->
+        <security:form-login
+                login-page="/login.html"
+                login-processing-url="/login"
+                default-target-url="/"
+                authentication-failure-url="/failure.html"/>
+<!--        关闭跨域请求-->
+        <security:csrf disabled="true"/>
+
+<!--        退出，只要路径中有/logout.html，就可以直接点击退出-->
+        <security:logout invalidate-session="true" logout-url="/logout.html" logout-success-url="/login.html"/>
+<!--        pattern:需要拦截的资源  /* 代表根目录下的一级目录  /** 代表根目录下的所有目录-->
+<!--        access:拦截方式-->
+<!--        isFullyAuthenticated():该资源需要认证才可以访问-->
+        <security:intercept-url pattern="/login.html" access="permitAll()"/>
+        <security:intercept-url pattern="/login" access="permitAll()"/>
+        <security:intercept-url pattern="/failure.html" access="permitAll()"/>
+        <security:intercept-url pattern="/register.html" access="permitAll()"/>
+        <security:intercept-url pattern="/static/**" access="permitAll()"/>
+        <security:intercept-url pattern="/user/**" access="permitAll()"/>
+        <security:intercept-url pattern="/**" access="isAuthenticated()"/>
+    </security:http>
+
+
+<!--    <security:authentication-manager> : 认证管理器类-->
+<!--    1) 认证信息获取方式(用户名,密码,当前用户权限等在哪获取)-->
+    <security:authentication-manager>
+<!--        定义授权信息提供源 userServiceImpl-->
+        <security:authentication-provider user-service-ref="userServiceImpl">
+<!--            配置加密方式为自定义的NoPasswordEncoder不加密类-->
+            <security:password-encoder ref="passwordEncoder"/>
+<!--            <security:user-service>-->
+<!--                <security:user name="root" password="root" authorities="role_all"/>-->
+<!--            </security:user-service>-->
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+    <bean class="com.yantao.security.NoPasswordEncoder" id="passwordEncoder"/>
+
+</beans>
