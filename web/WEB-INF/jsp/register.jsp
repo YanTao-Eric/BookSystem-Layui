@@ -95,7 +95,7 @@
         <div class="layui-input-inline">
             <select name="role" id="role" lay-filter="role">
                 <option value="5">学生</option>
-                <option value="2">辅导员</option>
+                <option value="4">老师</option>
                 <option value="1">管理员</option>
             </select>
         </div>
