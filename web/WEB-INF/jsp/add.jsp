@@ -16,7 +16,7 @@
 <head>
     <base href="<%=basePath%>">
     <title>添加书籍</title>
-    <link href="https://cdn.staticfile.org/twitter-bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/static/bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
 <body>
 <div class="container">

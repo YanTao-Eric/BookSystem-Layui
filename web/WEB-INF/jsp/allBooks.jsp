@@ -17,8 +17,8 @@
 <head>
     <base href="<%=basePath%>">
     <title>查询全部书籍</title>
-    <link href="https://cdn.staticfile.org/twitter-bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="https://cdn.staticfile.org/layui/2.6.8/css/layui.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/static/bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/static/layui/2.6.8/css/layui.css" rel="stylesheet"/>
 </head>
 <body>
     <div class="container">
@@ -69,7 +69,7 @@
 
     </div>
 
-<script src="https://cdn.staticfile.org/layui/2.6.8/layui.js" charset="UTF-8"></script>
+<script src="${pageContext.request.contextPath}/static/layui/2.6.8/layui.js" charset="UTF-8"></script>
 <script type="application/javascript">
     layui.use(['table', 'form'], function () {
         let $ = layui.jquery,
@@ -193,58 +193,6 @@
                     }, 'data');
                     break;
             }
-            // if (obj.event === 'add') {  // 监听添加操作
-            //
-            // } else if (obj.event === 'delete') {  // 监听删除操作
-            //     let checkStatus = table.checkStatus('bookTable')
-            //         , data = checkStatus.data
-            //         , length = data.length;
-            //     if (length > 0){
-            //         console.log(checkStatus)
-            //         layer.confirm('确定删除这' + length + '条数据？', {title: '提示'}, function () {
-            //             let ids = [];
-            //             for (let i = 0; i < data.length; i++) {
-            //                 ids.push(data[i].bookId);
-            //             }
-            //             // console.log(ids);
-            //             $.post({
-            //                 url: '/book/del-multiple',
-            //                 data: {
-            //                     ids: ids
-            //                 },
-            //                 success: function (res) {
-            //                     switch (res.code){
-            //                         case 0:
-            //                             layer.msg(res.msg, {icon: 1}, function () {
-            //                                 table.reload('bookTable', {
-            //                                     page: {
-            //                                         curr: 1
-            //                                     }
-            //                                 })
-            //                             });
-            //                             break;
-            //                         case 1:
-            //                             layer.msg(res.msg, {icon: 0}, function () {
-            //                                 table.reload('bookTable', {
-            //                                     page: {
-            //                                         curr: 1
-            //                                     }
-            //                                 })
-            //                             });
-            //                             break;
-            //                         case 2:
-            //                             layer.msg(res.msg, {icon: 2});
-            //                             break;
-            //                         default:
-            //                             layer.msg("error", {icon: 3});
-            //                     }
-            //                 }
-            //             })
-            //         })
-            //     }else {
-            //         layer.msg("请至少选择一条数据！", {icon: 0})
-            //     }
-            // }
         });
 
         table.on('tool(bookTableFilter)', function (obj) {

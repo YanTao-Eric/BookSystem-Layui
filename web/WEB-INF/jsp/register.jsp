@@ -95,8 +95,6 @@
         <div class="layui-input-inline">
             <select name="role" id="role" lay-filter="role">
                 <option value="5">学生</option>
-<%--                <option value="4">学生干部</option>--%>
-<%--                <option value="3">学生干事</option>--%>
                 <option value="2">辅导员</option>
                 <option value="1">管理员</option>
             </select>
@@ -112,29 +110,11 @@
 <script src="${pageContext.request.contextPath}/static/layui/2.6.8/layui.js" charset="UTF-8"></script>
 <script src="${pageContext.request.contextPath}/static/layuimini/js/lay-config.js?v=1.0.4" charset="utf-8"></script>
 <script>
-    layui.use(['layer', 'form', 'laydate', 'layarea', 'upload', 'element', 'croppers'], function () {
+    layui.use(['layer', 'form', 'laydate'], function () {
         let $ = layui.$,
             form = layui.form,
             layer = layui.layer,
-            laydate = layui.laydate,
-            layarea = layui.layarea,
-            upload = layui.upload,
-            element = layui.element,
-            croppers = layui.croppers;
-
-        let password_verify = function (value) {
-            if (value.length === 0){
-            }else if (value.length < 6){
-                return '密码长度不足6位'
-            }else if (value.length > 18) {
-                return '密码长度超过18位'
-            }else {
-                let p = /^(?=.*[a-zA-Z])(?=.*\d)[\s\S]{6,18}$/;
-                if (!p.test(value)){    //检测value是否符合正则表达式p，若符合返回true，反之为false
-                    return '密码应至少包含一个字母和一个数字'
-                }
-            }
-        }
+            laydate = layui.laydate;
 
         form.verify({
             nickname: [
@@ -160,15 +140,14 @@
 
         //监听提交
         form.on('submit(saveBtn)', function (data) {
-            // console.log(data.field);
             $.post({
-                url: '${pageContext.request.contextPath}/user/add',
+                url: '/user/add',
                 data: data.field,
                 success: function (res) {
                     console.log(res);
                     if(res.code === 0){
                         layer.msg(res.msg, {icon: 1}, function () {
-                            window.location = '${pageContext.request.contextPath}/login.html';
+                            window.location = '/login.html';
                         })
                     }else {
                         layer.alert(res.msg, {icon: 2});

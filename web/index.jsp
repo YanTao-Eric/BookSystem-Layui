@@ -17,7 +17,7 @@
     <head>
         <base href="<%=basePath%>">
         <title>首页</title>
-        <link href="https://cdn.staticfile.org/layui/2.6.8/css/layui.css" rel="stylesheet"/>
+        <link href="${pageContext.request.contextPath}/static/layui/2.6.8/css/layui.css" rel="stylesheet"/>
         <style>
             /*body{*/
             /*    background: url("/static/bg.jpg") no-repeat 100% 100% fixed;*/

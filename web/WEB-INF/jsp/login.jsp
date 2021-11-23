@@ -23,10 +23,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
-    <link rel="stylesheet" href="https://cdn.staticfile.org/layui/2.6.8/css/layui.css" media="all">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/layui/2.6.8/css/layui.css" media="all">
     <!--[if lt IE 9]>
-    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js" charset="UTF-8"></script>
-    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js" charset="UTF-8"></script>
+    <script src="${pageContext.request.contextPath}/static/ie/html5shiv/r29/html5.min.js" charset="UTF-8"></script>
+    <script src="${pageContext.request.contextPath}/static/ie/respond.js/1.4.2/respond.min.js" charset="UTF-8"></script>
     <![endif]-->
     <style>
         .main-body {top:50%;left:50%;position:absolute;-webkit-transform:translate(-50%,-50%);-moz-transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%);-o-transform:translate(-50%,-50%);transform:translate(-50%,-50%);overflow:hidden;}
@@ -42,13 +42,14 @@
         .login-main .login-bottom .center .item .icon {display:inline-block;width:33px;height:22px;}
         .login-main .login-bottom .center .item {width:288px;height:35px;border-bottom:1px solid #dae1e6;margin-bottom:35px;}
         .login-main {width:428px;position:relative;float:left;}
-        .login-main .login-top {height:117px;background-color:#148be4;border-radius:12px 12px 0 0;font-family:SourceHanSansCN-Regular;font-size:30px;font-weight:400;font-stretch:normal;letter-spacing:0;color:#fff;line-height:117px;text-align:center;overflow:hidden;-webkit-transform:rotate(0);-moz-transform:rotate(0);-ms-transform:rotate(0);-o-transform:rotate(0);transform:rotate(0);}
+        .login-main .login-top {height:117px;background-color:#148be4;border-radius:12px 12px 0 0;
+            font-family: SourceHanSansCN-Regular, serif;font-size:30px;font-weight:400;font-stretch:normal;letter-spacing:0;color:#fff;line-height:117px;text-align:center;overflow:hidden;-webkit-transform:rotate(0);-moz-transform:rotate(0);-ms-transform:rotate(0);-o-transform:rotate(0);transform:rotate(0);}
         .login-main .login-top .bg1 {display:inline-block;width:74px;height:74px;background:#fff;opacity:.1;border-radius:0 74px 0 0;position:absolute;left:0;top:43px;}
         .login-main .login-top .bg2 {display:inline-block;width:94px;height:94px;background:#fff;opacity:.1;border-radius:50%;position:absolute;right:-16px;top:-16px;}
         .login-main .login-bottom {width:428px;background:#fff;border-radius:0 0 12px 12px;padding-bottom:53px;}
         .login-main .login-bottom .center {width:288px;margin:0 auto;padding-top:40px;padding-bottom:15px;position:relative;}
         .login-main .login-bottom .tip {clear:both;height:16px;line-height:16px;width:288px;margin:0 auto;}
-        body {background:url(/static/loginbg.png) 0% 0% / cover no-repeat;position:static;font-size:12px;}
+        body {background:url(/static/loginbg.png) 0 0 / cover no-repeat;position:static;font-size:12px;}
         input::-webkit-input-placeholder {color:#a6aebf;}
         input::-moz-placeholder {/* Mozilla Firefox 19+ */            color:#a6aebf;}
         input:-moz-placeholder {/* Mozilla Firefox 4 to 18 */            color:#a6aebf;}
@@ -56,7 +57,8 @@
         input:-webkit-autofill {/* 取消Chrome记住密码的背景颜色 */            -webkit-box-shadow:0 0 0 1000px white inset !important;}
         html {height:100%;}
         .login-main .login-bottom .tip {clear:both;height:16px;line-height:16px;width:288px;margin:0 auto;}
-        .login-main .login-bottom .tip .login-tip {font-family:MicrosoftYaHei;font-size:12px;font-weight:400;font-stretch:normal;letter-spacing:0;color:#9abcda;cursor:pointer;}
+        .login-main .login-bottom .tip .login-tip {
+            font-family: MicrosoftYaHei, serif;font-size:12px;font-weight:400;font-stretch:normal;letter-spacing:0;color:#9abcda;cursor:pointer;}
         .login-main .login-bottom .tip .account {color:#1391ff;position:absolute;right:62px;}
         .login-main .login-bottom .tip a {font-stretch:normal;letter-spacing:0;color:#1391ff;text-decoration:none;}
         .login-main .login-bottom .login-btn {width:288px;height:40px;background-color:#1E9FFF;border-radius:16px;margin:24px auto 0;text-align:center;line-height:40px;color:#fff;font-size:14px;letter-spacing:0;cursor:pointer;border:none;}
@@ -86,7 +88,6 @@
                         <input type="text" name="username" lay-verify="required" lay-reqtext="账号不能为空" placeholder="请输入登录账号" maxlength="9" value="${cookie.get("uid").value}"/>
                     </label>
                 </div>
-
                 <div class="item">
                     <span class="icon icon-3"></span>
                     <label>
@@ -94,22 +95,11 @@
                     </label>
                     <span class="bind-password icon icon-4"></span>
                 </div>
-
-<%--                <div id="validatePanel" class="item" style="width: 137px;">--%>
-<%--                    <label>--%>
-<%--                        <input type="text" name="captcha" lay-verify="required" lay-reqtext="验证码不能为空" placeholder="请输入验证码" autocomplete="off" maxlength="4">--%>
-<%--                    </label>--%>
-<%--                    <img id="refreshCaptcha" class="validateImg" src="${pageContext.request.contextPath}/code" onclick="$(this).attr('src', '${pageContext.request.contextPath}/code?t=' + new Date().getTime())" alt="">--%>
-<%--                </div>--%>
-
             </div>
             <div class="layui-input-inline" style="margin-left: 70px;">
                 <input type="checkbox" name="remember-me" id="rememberMe" value="true" lay-skin="primary" title="一周内免登录">
             </div>
             <div class="tip layui-input-inline" style="margin-left: -70px;">
-<%--                <span class="icon-nocheck"></span>--%>
-<%--                <span class="login-tip" onclick="$('.icon-nocheck').click()">保持登录</span>--%>
-
                 <span class="account">
                     <a href="javascript:;" class="no-account">没有账号？</a>
                 </span>
@@ -123,8 +113,8 @@
 <div class="footer">
     ©版权所有 2021-2021 XX网络工作室<span class="padding-5">|</span><a target="_blank" href="https://beian.miit.gov.cn/">蜀ICP备12345678号</a>
 </div>
-<script src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" charset="UTF-8"></script>
-<script src="https://cdn.staticfile.org/layui/2.6.8/layui.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/static/jquery/3.6.0/jquery.min.js" charset="UTF-8"></script>
+<script src="${pageContext.request.contextPath}/static/layui/2.6.8/layui.js" charset="utf-8"></script>
 <script>
     layui.use(['form','jquery'], function () {
         let $ = layui.jquery,
@@ -162,30 +152,6 @@
         $('.no-account').on('click', function () {
             window.location = '/register.html';
         })
-
-        // 进行登录操作
-        <%--form.on('submit(login)', function (data) {--%>
-        <%--    data = data.field;--%>
-        <%--    $.post({--%>
-        <%--        url: '/login',--%>
-        <%--        data: {--%>
-        <%--            username: data.username,--%>
-        <%--            password: data.password,--%>
-        <%--            captcha: data.captcha,--%>
-        <%--            keepLogin: keepLogin--%>
-        <%--        },--%>
-        <%--        success: function (res) {--%>
-        <%--            if (res.code !== 0){--%>
-        <%--                layer.msg(res.msg, {icon: 2}, function () {--%>
-        <%--                    window.location = "${pageContext.request.contextPath}/login.html";--%>
-        <%--                })--%>
-        <%--            }else {--%>
-        <%--                window.location = "/index.html";--%>
-        <%--            }--%>
-        <%--        }--%>
-        <%--    })--%>
-        <%--    return false;--%>
-        <%--});--%>
     });
 </script>
 </body>

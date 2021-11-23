@@ -16,7 +16,7 @@
 <head>
     <base href="<%=basePath%>">
     <title>修改书籍</title>
-    <link href="https://cdn.staticfile.org/twitter-bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/static/bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
 <body>
 <div class="container">
@@ -43,7 +43,6 @@
         </div>
         <div class="form-group">
             <label for="bookDetail">书籍描述</label>
-<%--            <input type="text" class="form-control" name="detail" id="bookDetail" value="${book.detail}" placeholder="Detail" required>--%>
             <textarea class="form-control" name="detail" id="bookDetail" placeholder="Detail" style="min-height: 54px; resize: none;" required>${book.detail}</textarea>
         </div>
         <button type="submit" class="btn btn-danger col-xs-4">提&nbsp;&nbsp;&nbsp;交</button>
@@ -52,8 +51,5 @@
 </div>
 
 <script src="${pageContext.request.contextPath}/static/jquery/3.6.0/jquery.min.js" charset="UTF-8"></script>
-<script>
-    // $("#bookDetail").textareaAutoHeight({ maxHeight:100 });
-</script>
 </body>
 </html>
